@@ -36,30 +36,59 @@ const getIdArquichive = async (req, res) => {  // Testado
 }
 
 
-const postArquichive = (req, res) => {
-    res.json({
-        message: "Hello World"
-    });
+const createArquichive = async (req, res) => {
+    try {
+
+        const arquichive = req.body;
+
+        const arquichiveData = await fs.promises.readFile("arquichive.json", "utf-8");
+        const arquichiveObject = JSON.parse(arquichiveData);
+
+        arquichive.id = Date.now().toString();
+        arquichiveObject.push(arquichive);
+
+        await fs.promises.writeFile(
+            "arquichive.json",
+            JSON.stringify(arquichiveObject, null, 2)
+        );
+
+        if (!arquichive) {
+            res.status(404).json({ message: "Arquichive não encontrado" });
+        }
+
+        res.status(201).json(arquichive);
+
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erro ao buscar arquichive" });
+    }
 }
 
-const putArquichive = (req, res) => {
-    res.json({
-        message: "Hello World"
-    });
+const updateArquichive = async (req, res) => {
+    try {
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erro ao buscar arquichive" });
+    }
 }
 
-const deleteArquichive = (req, res) => {
-    res.json({
-        message: "Hello World"
-    });
+const deleteArquichive = async (req, res) => {
+    try {
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Erro ao buscar arquichive" });
+    }
 }
 
 
 module.exports = {
     getArquichive,
     getIdArquichive,
-    postArquichive,
-    putArquichive,
+    createArquichive,
+    updateArquichive,
     deleteArquichive
 };
 

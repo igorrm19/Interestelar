@@ -3,11 +3,11 @@ const controllrs = require("../controllrs/archive.controllrs");
 const router = express.Router();
 
 
-router.get("/arquichive", controllrs.getArquichive);
-router.get("/arquichive/:id", controllrs.getIdArquichive);
-router.post("/arquichive", controllrs.postArquichive);
-router.put("/arquichive/:id", controllrs.putArquichive);
-router.delete("/arquichive/:id", controllrs.deleteArquichive);
+router.get("/entries", controllrs.getArquichive);
+router.get("/entries/:id", controllrs.getIdArquichive);
+router.post("/entries", controllrs.createArquichive);
+router.put("/entries/:id", controllrs.updateArquichive);
+router.delete("/entries/:id", controllrs.deleteArquichive);
 
 
 module.exports = router;
