@@ -7,7 +7,7 @@
 :root {
     --primary-color: #000000;
     --secondary-color: #FFFFFF;
-    --tertiary-color: #FF0000;
+    --tertiary-color: #2e67e2;
 
     --font-family: 'Poppins', sans-serif;
     --font-size: 16px;
@@ -25,4 +25,27 @@
 
 body {
     background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.card {
+    background-color: var(--tertiary-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    height: 60vh;
+    width: 30vw;
+    text-align: center;
 }

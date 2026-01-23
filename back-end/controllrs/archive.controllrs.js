@@ -1,9 +1,12 @@
 const fs = require("fs");
+const path = require("path");
+
+const arqPath = path.join(__dirname, "..", "arquichive.json");
 
 const getArquichive = async (req, res) => {  // Testado
     try {
 
-        const data = await fs.promises.readFile("arquichive.json", "utf-8");
+        const data = await fs.promises.readFile(arqPath, "utf-8");
         res.status(200).json(JSON.parse(data));
 
         if (!data) {
@@ -20,7 +23,7 @@ const getArquichive = async (req, res) => {  // Testado
 const getIdArquichive = async (req, res) => {  // Testado
     try {
 
-        const data = await fs.promises.readFile("arquichive.json", "utf-8");
+        const data = await fs.promises.readFile(arqPath, "utf-8");
         const arquichive = JSON.parse(data);
 
         if (!data) {
@@ -41,14 +44,14 @@ const createArquichive = async (req, res) => { // Testado
 
         const arquichive = req.body;
 
-        const arquichiveData = await fs.promises.readFile("arquichive.json", "utf-8");
+        const arquichiveData = await fs.promises.readFile(arqPath, "utf-8");
         const arquichiveObject = JSON.parse(arquichiveData);
 
         arquichive.id = Date.now().toString();
         arquichiveObject.push(arquichive);
 
         await fs.promises.writeFile(
-            "arquichive.json",
+            arqPath,
             JSON.stringify(arquichiveObject, null, 2)
         );
 
@@ -69,33 +72,30 @@ const updateArquichive = async (req, res) => {
     try {
 
         const { id } = req.params;
-        const { status } = req.body;
+        const updates = req.body;
 
-        if (!status) {
-            return res.status(400).json({ message: "Status é obrigatório" });
+        if (!updates || Object.keys(updates).length === 0) {
+            return res.status(400).json({ message: "Corpo da requisição vazio" });
         }
 
-        const arquichive = await fs.promises.readFile("arquichive.json", "utf-8");
-        const arquichiveObject = JSON.parse(arquichive);
+        const data = await fs.promises.readFile(arqPath, "utf-8");
+        const arquichiveObject = JSON.parse(data);
 
         const index = arquichiveObject.findIndex(
-            arquichive => String(arquichive.id) === id
+            item => String(item.id) === id
         );
 
         if (index < 0) {
-            return res.status(404).json({ message: "Arquichive não atualizado" });
+            return res.status(404).json({ message: "Arquichive não encontrado para atualização" });
         }
 
-        arquichiveObject[index].status = status;
 
-        fs.writeFileSync(
-            "arquichive.json",
+        arquichiveObject[index] = { ...arquichiveObject[index], ...updates, id: arquichiveObject[index].id };
+
+        await fs.promises.writeFile(
+            arqPath,
             JSON.stringify(arquichiveObject, null, 2)
         );
-
-        if (!arquichiveObject[index]) {
-            return res.status(404).json({ message: "Arquichive não atualizado" });
-        }
 
         res.status(200).json(arquichiveObject[index]);
 
@@ -111,21 +111,21 @@ const deleteArquichive = async (req, res) => {
 
         const { id } = req.params;
 
-        const arquichive = await fs.promises.readFile("arquichive.json", "utf-8");
-        const arquichiveObject = JSON.parse(arquichive);
+        const data = await fs.promises.readFile(arqPath, "utf-8");
+        const arquichiveObject = JSON.parse(data);
 
         const index = arquichiveObject.findIndex(
-            arquichive => String(arquichive.id) === id
+            item => String(item.id) === id
         );
 
         if (index < 0) {
-            return res.status(404).json({ message: "Arquichive não deletado" });
+            return res.status(404).json({ message: "Arquichive não encontrado para exclusão" });
         }
 
         arquichiveObject.splice(index, 1);
 
-        fs.writeFileSync(
-            "arquichive.json",
+        await fs.promises.writeFile(
+            arqPath,
             JSON.stringify(arquichiveObject, null, 2)
         );
 
