@@ -11,5 +11,5 @@ app.use(errMiddleware);
 
 
 app.listen(5000, () => {
-    console.log("Server rodando na porta 3000");
+    console.log("Server rodando na porta 5000");
 });
