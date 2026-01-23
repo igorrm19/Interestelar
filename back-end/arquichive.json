@@ -4,11 +4,12 @@
     "name": "Xenomorph XX121",
     "type": "Biological",
     "dangerLevel": "Extreme",
-    "description": "Highly aggressive endoparasitoid extraterrestrial species."
+    "description": "Highly aggressive endoparasitoid extraterrestrial species.",
+    "status": "active"
   },
   {
-    "Agent": "Jammiller",
+    "Agent": "RM",
     "status": "active",
-    "id": "1769158204105"
+    "id": "1769159638215"
   }
 ]

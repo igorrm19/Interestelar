@@ -36,7 +36,7 @@ const getIdArquichive = async (req, res) => {  // Testado
 }
 
 
-const createArquichive = async (req, res) => {
+const createArquichive = async (req, res) => { // Testado
     try {
 
         const arquichive = req.body;
@@ -53,7 +53,7 @@ const createArquichive = async (req, res) => {
         );
 
         if (!arquichive) {
-            res.status(404).json({ message: "Arquichive não encontrado" });
+            res.status(404).json({ message: "Arquichive não criado" });
         }
 
         res.status(201).json(arquichive);
@@ -83,7 +83,7 @@ const updateArquichive = async (req, res) => {
         );
 
         if (index < 0) {
-            return res.status(404).json({ message: "Arquichive não encontrado" });
+            return res.status(404).json({ message: "Arquichive não atualizado" });
         }
 
         arquichiveObject[index].status = status;
@@ -94,7 +94,7 @@ const updateArquichive = async (req, res) => {
         );
 
         if (!arquichiveObject[index]) {
-            return res.status(404).json({ message: "Arquichive não encontrado" });
+            return res.status(404).json({ message: "Arquichive não atualizado" });
         }
 
         res.status(200).json(arquichiveObject[index]);
@@ -119,7 +119,7 @@ const deleteArquichive = async (req, res) => {
         );
 
         if (index < 0) {
-            return res.status(404).json({ message: "Arquichive não encontrado" });
+            return res.status(404).json({ message: "Arquichive não deletado" });
         }
 
         arquichiveObject.splice(index, 1);
@@ -129,9 +129,6 @@ const deleteArquichive = async (req, res) => {
             JSON.stringify(arquichiveObject, null, 2)
         );
 
-        if (!arquichiveObject[index]) {
-            return res.status(404).json({ message: "Arquichive não encontrado" });
-        }
 
         res.status(204).send();
 
