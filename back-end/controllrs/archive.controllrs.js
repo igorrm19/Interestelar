@@ -68,14 +68,72 @@ const createArquichive = async (req, res) => {
 const updateArquichive = async (req, res) => {
     try {
 
+        const { id } = req.params;
+        const { status } = req.body;
+
+        if (!status) {
+            return res.status(400).json({ message: "Status é obrigatório" });
+        }
+
+        const arquichive = await fs.promises.readFile("arquichive.json", "utf-8");
+        const arquichiveObject = JSON.parse(arquichive);
+
+        const index = arquichiveObject.findIndex(
+            arquichive => String(arquichive.id) === id
+        );
+
+        if (index < 0) {
+            return res.status(404).json({ message: "Arquichive não encontrado" });
+        }
+
+        arquichiveObject[index].status = status;
+
+        fs.writeFileSync(
+            "arquichive.json",
+            JSON.stringify(arquichiveObject, null, 2)
+        );
+
+        if (!arquichiveObject[index]) {
+            return res.status(404).json({ message: "Arquichive não encontrado" });
+        }
+
+        res.status(200).json(arquichiveObject[index]);
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Erro ao buscar arquichive" });
     }
 }
 
+
 const deleteArquichive = async (req, res) => {
     try {
+
+        const { id } = req.params;
+
+        const arquichive = await fs.promises.readFile("arquichive.json", "utf-8");
+        const arquichiveObject = JSON.parse(arquichive);
+
+        const index = arquichiveObject.findIndex(
+            arquichive => String(arquichive.id) === id
+        );
+
+        if (index < 0) {
+            return res.status(404).json({ message: "Arquichive não encontrado" });
+        }
+
+        arquichiveObject.splice(index, 1);
+
+        fs.writeFileSync(
+            "arquichive.json",
+            JSON.stringify(arquichiveObject, null, 2)
+        );
+
+        if (!arquichiveObject[index]) {
+            return res.status(404).json({ message: "Arquichive não encontrado" });
+        }
+
+        res.status(204).send();
 
     } catch (err) {
         console.error(err);

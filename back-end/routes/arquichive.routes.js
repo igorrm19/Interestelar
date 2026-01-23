@@ -10,4 +10,14 @@ router.put("/entries/:id", controllrs.updateArquichive);
 router.delete("/entries/:id", controllrs.deleteArquichive);
 
 
+
+router.put("/entries", (req, res) => {
+    res.json({ message: "Rota não permitida, adicione um id" });
+});
+
+router.delete("/entries", (req, res) => {
+    res.json({ message: "Rota não permitida, adicione um id" });
+});
+
+
 module.exports = router;
