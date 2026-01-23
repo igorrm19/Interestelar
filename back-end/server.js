@@ -1,9 +1,11 @@
 const express = require("express");
-const morgan = require("morgan");
+const errMiddleware = require("./middleware/err.middleware");
+const log = require("./middleware/log.middleware");
 const app = express();
 
 app.use(express.json());
-app.use(morgan("dev"));
+app.use(log);
+app.use(errMiddleware);
 
 app.get("/", (req, res) => {
 
@@ -12,6 +14,6 @@ app.get("/", (req, res) => {
     });
 });
 
-app.listen(3000, () => {
+app.listen(5000, () => {
     console.log("Server rodando na porta 3000");
 });
