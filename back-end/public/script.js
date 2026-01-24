@@ -14,12 +14,12 @@ let description;
 let status;
 
 async function ServidorConnection() {
-    const response = await fetch("http://localhost:5000/entries")
+    await fetch("http://localhost:5000/entries")
         .then(response => response.json())
         .then(data => {
-            //const names = data.map(element => element.name);
-            // const entries = document.getElementById("entries");
-            //entries.textContent = names[0];
+
+            // names = data.map(element => element.name);
+
         })
         .catch(error => console.log(error));
 
