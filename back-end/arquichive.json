@@ -9,6 +9,9 @@
   },
   {
     "Agent": "RM",
+    "type": "Human",
+    "dangerLevel": "Extreme",
+    "description": "Highly aggressive endoparasitoid extraterrestrial species.",
     "status": "active",
     "id": "1769159638215"
   }
