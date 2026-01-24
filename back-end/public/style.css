@@ -7,7 +7,7 @@
 :root {
     --primary-color: #000000;
     --secondary-color: #FFFFFF;
-    --tertiary-color: #319409;
+    --tertiary-color: #49c418;
 
     --font-family: 'Poppins', sans-serif;
     --font-size: 16px;
@@ -64,19 +64,43 @@ br {
 }
 
 .header {
-    height: 20%;
+    height: 15%;
     width: 100%;
-    background-color: #c41616;
+}
+
+.header-title {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header-button {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    background-color: #1622c4;
 }
 
 .main {
-    height: 80%;
+    height: 100%;
     width: 60%;
     background-color: #16c459;
 }
 
 .article {
-    height: 80%;
+    height: 100%;
     width: 40%;
-    background-color: #1622c4;
+    background-color: #195831;
 }
