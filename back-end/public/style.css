@@ -21,6 +21,8 @@
     --button-text-color: #FFFFFF;
     --button-hover-color: #FF0000;
     --button-hover-text-color: #FFFFFF;
+
+    --padding-input-button: 10px;
 }
 
 body {
@@ -90,17 +92,83 @@ br {
     height: 80%;
     width: 100%;
     display: flex;
-    background-color: #1622c4;
 }
 
 .main {
     height: 100%;
     width: 60%;
-    background-color: #16c459;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .article {
     height: 100%;
     width: 40%;
     background-color: #195831;
+}
+
+.input-button {
+    padding: var(--padding-input-button);
+    border-radius: var(--border-radius);
+    background-color: #FFFFFF;
+    color: #000000;
+    border: none;
+}
+
+#add-button {
+    background-color: #49c418;
+    color: #FFFFFF;
+    width: 60px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+#delete-button {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    width: 60px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+#edit-button {
+    background-color: #e48912;
+    color: #FFFFFF;
+    width: 60px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+#search-button {
+    width: 300px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.input-button:hover {
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.archive {
+    width: 75%;
+    height: 15%;
+    margin-top: 20px;
+    background-color: #1622c4;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#status {
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background-color: #49c418;
+    margin-right: 10px;
+    border: 2px solid #FFFFFF;
 }
