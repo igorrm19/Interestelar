@@ -10,8 +10,8 @@
     --tertiary-color: #49c418;
 
     --font-family: 'Poppins', sans-serif;
-    --font-size: 16px;
-    --font-weight: 400;
+    --font-size: 18px;
+    --font-weight: 500;
 
     --border-radius: 8px;
     --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -37,7 +37,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 br {
@@ -60,27 +60,33 @@ br {
     align-items: center;
     flex-direction: column;
     padding: 20px;
-    height: 80vh;
-    width: 70vw;
+    width: 90vw;
+    height: 90vh;
     text-align: center;
 }
 
 .header {
-    height: 15%;
+    height: auto;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .header-title {
-    height: 50%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.header-title h2 {
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 0 0 10px var(--tertiary-color);
 }
 
 .header-button {
-    height: 50%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -89,22 +95,29 @@ br {
 }
 
 .content {
-    height: 80%;
+    height: 100%;
     width: 100%;
     display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .main {
-    height: 100%;
-    width: 60%;
+    height: 60%;
+    width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
 .article {
-    height: 100%;
-    width: 40%;
+    height: 40%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-top: 15px;
+    overflow-y: auto;
 }
 
 .input-button {
@@ -113,14 +126,16 @@ br {
     background-color: #FFFFFF;
     color: #000000;
     border: none;
+    font-size: 1rem;
 }
 
 #add-button {
     background-color: #49c418;
     color: #FFFFFF;
-    width: 60px;
+    width: 80px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
+    margin-left: 10px;
 }
 
 #delete-button {
@@ -140,7 +155,7 @@ br {
 }
 
 #search-button {
-    width: 300px;
+    width: 200px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
 }
@@ -151,30 +166,213 @@ br {
     transition: var(--transition);
 }
 
+.history {}
+
 .archive {
-    width: 75%;
-    height: 15%;
-    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    min-height: 80px;
+    margin-top: 0;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #1f795b;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    padding: 10px;
+    color: white;
+    transition: transform 0.2s;
+}
+
+.archive:hover {
+    transform: scale(1.02);
+}
+
+.archive-info {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    gap: 15px;
+    flex-grow: 1;
+}
+
+.archive-actions {
+    display: flex;
+    gap: 10px;
 }
 
 .arquichive-atributo {
     color: #FFFFFF;
-    font-size: 16px;
-    font-weight: 400;
-    padding: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 5px;
 }
 
 #status {
     border-radius: 100%;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     background-color: #49c418;
     border: 2px solid #FFFFFF;
+    flex-shrink: 0;
+}
+
+#archive-list {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.modal {
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(73, 196, 24, 0.5);
+    box-shadow: 0 0 20px rgba(73, 196, 24, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    backdrop-filter: blur(5px);
+}
+
+.modal h2 {
+    text-align: center;
+    color: var(--tertiary-color);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background: #111;
+    color: white;
+    font-family: var(--font-family);
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--tertiary-color);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.save-btn {
+    background-color: var(--tertiary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.cancel-btn {
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.action-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.edit-btn {
+    background-color: #e48912;
+}
+
+.delete-btn {
+    background-color: #FF0000;
+}
+
+#resumo-content {
+    margin-top: 10px;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #fff;
+}
+
+
+@media (min-width: 768px) {
+    .content {
+        flex-direction: row;
+    }
+
+    .main {
+        height: 100%;
+        width: 60%;
+    }
+
+    .article {
+        height: 100%;
+        width: 40%;
+        margin-top: 0;
+        margin-left: 15px;
+    }
+
+    .card {
+        width: 80vw;
+        height: 80vh;
+    }
+
+    #search-button {
+        width: 300px;
+    }
 }

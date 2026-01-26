@@ -16,30 +16,57 @@
                     <h2>Painel Interestelar</h2>
                 </div>
                 <div id="header-button" class="header-button">
-                    <form action="">
+                    <form action="" onsubmit="event.preventDefault()">
                         <input class="input-button" id="search-button" type="search" placeholder="Pesquisar">
                         <button class="input-button" id="add-button">Add</button>
-                        <button class="input-button" id="edit-button">Editar</button>
-                        <button class="input-button" id="delete-button">Excluir</button>
                     </form>
                 </div>
             </header>
             <div id="content" class="content">
                 <main class="main" id="main">
-                    <div class="archive" id="archive">
-                        <div class="status" id="status"></div>
-                        <h3 class="arquichive-atributo" id="name">name</h3>
-                        <h3 class="arquichive-atributo" id="type">type</h3>
-                        <h3 class="arquichive-atributo" id="danger-level">danger-level</h3>
-                        <h3 class="arquichive-atributo" id="description">description</h3>
-                    </div>
+                    <div id="archive-list"></div>
                 </main>
                 <article id="article" class="article">
                     <h2>Resumo</h2>
+                    <div id="resumo-content"></div>
                 </article>
             </div>
         </section>
     </main>
+
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <h2 id="modal-title">Novo Registro</h2>
+            <form id="archive-form">
+                <input type="hidden" id="entry-id">
+                <div class="form-group">
+                    <label for="entry-name">Nome:</label>
+                    <input type="text" id="entry-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="entry-type">Tipo:</label>
+                    <input type="text" id="entry-type" required>
+                </div>
+                <div class="form-group">
+                    <label for="entry-danger">Nível de Perigo:</label>
+                    <select id="entry-danger" required>
+                        <option value="Baixo">Baixo</option>
+                        <option value="Médio">Médio</option>
+                        <option value="Alto">Alto</option>
+                        <option value="Extremo">Extremo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="entry-description">Descrição:</label>
+                    <textarea id="entry-description" rows="4" required></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Salvar</button>
+                    <button type="button" id="cancel-btn" class="cancel-btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="./script.js"></script>
 </body>
