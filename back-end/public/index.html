@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <section id=" card" class="card">
+            <header id="header" class="header">
+                <div id="header-title" class="header-title">
+                    <h2>Painel Interestelar</h2>
+                </div>
+                <div id="header-button" class="header-button">
+                    <form action="" onsubmit="event.preventDefault()">
+                        <input class="input-button" id="search-button" type="search" placeholder="Pesquisar">
+                        <button class="input-button" id="add-button">Add</button>
+                    </form>
+                </div>
+            </header>
+            <div id="content" class="content">
+                <main class="main" id="main">
+                    <div id="archive-list"></div>
+                </main>
+                <article id="article" class="article">
+                    <h2>Resumo</h2>
+                    <div id="resumo-content"></div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <h2 id="modal-title">Novo Registro</h2>
+            <form id="archive-form">
+                <input type="hidden" id="entry-id">
+                <div class="form-group">
+                    <label for="entry-name">Nome:</label>
+                    <input type="text" id="entry-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="entry-type">Tipo:</label>
+                    <input type="text" id="entry-type" required>
+                </div>
+                <div class="form-group">
+                    <label for="entry-danger">Nível de Perigo:</label>
+                    <select id="entry-danger" required>
+                        <option value="Baixo">Baixo</option>
+                        <option value="Médio">Médio</option>
+                        <option value="Alto">Alto</option>
+                        <option value="Extremo">Extremo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="entry-description">Descrição:</label>
+                    <textarea id="entry-description" rows="4" required></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Salvar</button>
+                    <button type="button" id="cancel-btn" class="cancel-btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
