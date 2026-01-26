@@ -105,7 +105,6 @@ br {
 .article {
     height: 100%;
     width: 40%;
-    background-color: #195831;
 }
 
 .input-button {
@@ -156,12 +155,20 @@ br {
     width: 75%;
     height: 15%;
     margin-top: 20px;
-    background-color: #1622c4;
+    background-color: #1f795b;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     padding: 10px;
     display: flex;
     align-items: center;
+    justify-content: space-around;
+}
+
+.arquichive-atributo {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px;
 }
 
 #status {
@@ -169,6 +176,5 @@ br {
     width: 20px;
     height: 20px;
     background-color: #49c418;
-    margin-right: 10px;
     border: 2px solid #FFFFFF;
 }
