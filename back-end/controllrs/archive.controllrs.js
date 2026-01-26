@@ -39,10 +39,13 @@ const getIdArquichive = async (req, res) => {  // Testado
 }
 
 
-const createArquichive = async (req, res) => { // Testado
+const createArquichive = async (req, res) => {
     try {
-
         const arquichive = req.body;
+
+        if (!arquichive || Object.keys(arquichive).length === 0) {
+            return res.status(400).json({ message: "Dados inválidos" });
+        }
 
         const arquichiveData = await fs.promises.readFile(arqPath, "utf-8");
         const arquichiveObject = JSON.parse(arquichiveData);
@@ -55,16 +58,11 @@ const createArquichive = async (req, res) => { // Testado
             JSON.stringify(arquichiveObject, null, 2)
         );
 
-        if (!arquichive) {
-            res.status(404).json({ message: "Arquichive não criado" });
-        }
-
-        res.status(201).json(arquichive);
-
+        return res.status(201).json(arquichive);
 
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Erro ao buscar arquichive" });
+        return res.status(500).json({ message: "Erro ao criar arquichive" });
     }
 }
 

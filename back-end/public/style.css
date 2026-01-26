@@ -113,11 +113,19 @@ br {
 .article {
     height: 40%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(73, 196, 24, 0.3);
     border-radius: var(--border-radius);
-    padding: 15px;
+    padding: 20px;
     margin-top: 15px;
     overflow-y: auto;
+}
+
+.article h2 {
+    color: var(--tertiary-color);
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.5rem;
 }
 
 .input-button {
@@ -165,8 +173,6 @@ br {
     box-shadow: var(--box-shadow);
     transition: var(--transition);
 }
-
-.history {}
 
 .archive {
     width: 100%;

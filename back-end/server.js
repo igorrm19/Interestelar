@@ -7,8 +7,10 @@ const indexHTMLMiddleware = require("./middleware/indexHTML.middleware");
 const cors = require("cors");
 
 
+
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 app.use(log);
 app.use("/", Router);
 app.use(indexHTMLMiddleware);

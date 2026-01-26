@@ -117,13 +117,13 @@ function showDetails(id) {
     const entryName = entry.name || entry.Agent || "Desconhecido";
 
     resumoContent.innerHTML = `
-        <h3>${entryName}</h3>
+        <h3 style="color: var(--tertiary-color); margin-bottom: 15px;">${entryName}</h3>
         <p><strong>ID:</strong> ${entry.id}</p>
         <p><strong>Tipo:</strong> ${entry.type || "-"}</p>
         <p><strong>Nível de Perigo:</strong> ${entry.dangerLevel || "-"}</p>
-        <br>
-        <p><strong>Descrição:</strong></p>
-        <p>${entry.description || "Sem descrição."}</p>
+        <hr style="border: 1px solid rgba(73, 196, 24, 0.3); margin: 15px 0;">
+        <h4 style="color: var(--tertiary-color); margin-bottom: 10px;">Descrição:</h4>
+        <p style="line-height: 1.8; text-align: justify;">${entry.description || "Sem descrição."}</p>
     `;
 }
 
