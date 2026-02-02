@@ -48,4 +48,12 @@ To configure your project, you need Node.js installed; it has some dependencies 
 With npm installed, Node and its dependencies are now ready to run with npm run dev or node serve
 
 
+
 <img src="./back-end/public/img/Screenshot from 2026-01-26 04-08-36.png">
+
+
+## Swagger Documentation
+
+Documentation available at http://localhost:5000/api-docs
+
+<img src="./back-end/public/img/Screenshot from 2026-02-02 06-35-51.png">
