@@ -1,9 +1,10 @@
-const Pool = require("../models/db.model")
+const Pool = require("../models/db.model");
+const Entries = require("../models/entries.model");
 
 const getArquichive = async (req, res) => {  // Testado
     try {
 
-        const archive = await Pool.query("SELECT * FROM entries ORDER BY name ASC");
+        const archive = await Entries.getEntries();
 
         if (archive.rowCount === 0) {
             return res.status(200).json([]);
@@ -21,7 +22,7 @@ const getArquichive = async (req, res) => {  // Testado
 const getIdArquichive = async (req, res) => {  // Testado
     try {
 
-        const archive = await Pool.query("SELECT * FROM entries WHERE id = $1", [req.params.id]);
+        const archive = await Entries.getEntryById(req.params.id);
 
         if (archive.rowCount === 0) {
             return res.status(404).send({ message: "Archive não encontrado" });
@@ -40,12 +41,7 @@ const createArquichive = async (req, res) => {
     try {
         const { name, type, danger_level, description } = req.body;
 
-        const result = await Pool.query(
-            `INSERT INTO entries (name, type, danger_level, description)
-             VALUES ($1, $2, $3, $4)
-             RETURNING *`,
-            [name, type, danger_level, description]
-        );
+        const result = await Entries.createEntry({ name, type, danger_level, description });
 
 
         res.status(201).send(result.rows[0]);
@@ -61,16 +57,7 @@ const updateArquichive = async (req, res) => {
 
         const { name, type, danger_level, description } = req.body;
 
-        const result = await Pool.query(
-            `UPDATE entries
-             SET name = $1,
-                 type = $2,
-                 danger_level = $3,
-                 description = $4
-             WHERE id = $5
-             RETURNING *`,
-            [name, type, danger_level, description, req.params.id]
-        );
+        const result = await Entries.updateEntry(req.params.id, { name, type, danger_level, description });
 
         if (result.rowCount === 0) {
             return res.status(404).send({ message: "Archive não atualizado" });
@@ -88,7 +75,7 @@ const updateArquichive = async (req, res) => {
 const deleteArquichive = async (req, res) => {
     try {
 
-        const result = await Pool.query("DELETE FROM entries WHERE id = $1", [req.params.id]);
+        const result = await Entries.deleteEntry(req.params.id);
 
         if (result.rowCount === 0) {
             return res.status(404).send({ message: "Archive não deletado" });
