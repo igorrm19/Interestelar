@@ -1,3 +1,5 @@
+// psql -U postgres
+
 const express = require("express");
 const errMiddleware = require("./middleware/err.middleware");
 const log = require("./middleware/log.middleware");
