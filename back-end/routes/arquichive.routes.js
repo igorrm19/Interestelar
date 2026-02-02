@@ -1,12 +1,13 @@
 const express = require("express");
 const controllrs = require("../controllrs/archive.controllrs");
+const validateEntry = require("../middleware/validateZod.middlware");
 const router = express.Router();
 
 
 router.get("/entries", controllrs.getArquichive);
 router.get("/entries/:id", controllrs.getIdArquichive);
-router.post("/entries", controllrs.createArquichive);
-router.put("/entries/:id", controllrs.updateArquichive);
+router.post("/entries", validateEntry, controllrs.createArquichive);
+router.put("/entries/:id", validateEntry, controllrs.updateArquichive);
 router.delete("/entries/:id", controllrs.deleteArquichive);
 
 

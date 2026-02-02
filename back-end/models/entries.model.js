@@ -9,13 +9,22 @@ const getEntryById = (id) => {
 };
 
 const createEntry = (entry) => {
+    if (entry.danger_level === "" || entry.danger_level === null) {
+        entry.danger_level = "baixo";
+    }
+
     return Pool.query(
         "INSERT INTO entries (name, type, danger_level, description) VALUES ($1, $2, $3, $4) RETURNING *",
         [entry.name, entry.type, entry.danger_level, entry.description]
     );
+
 };
 
 const updateEntry = (id, entry) => {
+    if (entry.danger_level === "" || entry.danger_level === null) {
+        entry.danger_level = "baixo";
+    }
+
     return Pool.query(
         "UPDATE entries SET name = $2, type = $3, danger_level = $4, description = $5 WHERE id = $1 RETURNING *",
         [id, entry.name, entry.type, entry.danger_level, entry.description]

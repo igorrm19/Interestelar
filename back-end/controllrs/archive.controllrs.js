@@ -1,6 +1,7 @@
 const Pool = require("../models/db.model");
 const Entries = require("../models/entries.model");
 
+
 const getArquichive = async (req, res) => {  // Testado
     try {
 
@@ -9,6 +10,7 @@ const getArquichive = async (req, res) => {  // Testado
         if (archive.rowCount === 0) {
             return res.status(200).json([]);
         }
+
 
         res.status(200).json(archive.rows)
 
