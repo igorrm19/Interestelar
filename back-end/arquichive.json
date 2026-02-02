@@ -38,5 +38,14 @@
     "description": "Esse animal terraquel se espalhou por toda galaxia apressentado diversas variações, com uma capacidade de sobrevincia fora do normal para a maior parte dos seres vivos",
     "status": "active",
     "id": "1769411263149"
+  },
+  {
+    "name": "Domino2",
+    "status": "active1",
+    "skills": [
+      "solving puzzles",
+      "strategy"
+    ],
+    "id": "1769711095864"
   }
 ]

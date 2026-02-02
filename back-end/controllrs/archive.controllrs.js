@@ -7,7 +7,7 @@ const getArquichive = async (req, res) => {  // Testado
     try {
 
         const data = await fs.promises.readFile(arqPath, "utf-8");
-        res.status(200).json(JSON.parse(data));
+        const arquichive = JSON.parse(data);
 
         if (!data) {
             res.status(404).json({ message: "Arquichive nao encontrado" });
