@@ -1,17 +1,15 @@
-const fs = require("fs");
-const path = require("path");
-
-const arqPath = path.join(__dirname, "..", "arquichive.json");
+const Pool = require("../models/db.model")
 
 const getArquichive = async (req, res) => {  // Testado
     try {
 
-        const data = await fs.promises.readFile(arqPath, "utf-8");
-        const arquichive = JSON.parse(data);
+        const archive = await Pool.query("SELECT * FROM entries ORDER BY name ASC");
 
-        if (!data) {
-            res.status(404).json({ message: "Arquichive nao encontrado" });
+        if (archive.rowCount === 0) {
+            return res.status(200).json([]);
         }
+
+        res.status(200).json(archive.rows)
 
     } catch (err) {
         console.error(err);
@@ -23,14 +21,13 @@ const getArquichive = async (req, res) => {  // Testado
 const getIdArquichive = async (req, res) => {  // Testado
     try {
 
-        const data = await fs.promises.readFile(arqPath, "utf-8");
-        const arquichive = JSON.parse(data);
+        const archive = await Pool.query("SELECT * FROM entries WHERE id = $1", [req.params.id]);
 
-        if (!data) {
-            res.status(404).json({ message: "Arquichive nao encontrado" });
+        if (archive.rowCount === 0) {
+            return res.status(404).send({ message: "Archive não encontrado" });
         }
 
-        res.status(200).json(arquichive);
+        res.status(200).json(archive.rows)
 
     } catch (err) {
         console.error(err);
@@ -41,24 +38,17 @@ const getIdArquichive = async (req, res) => {  // Testado
 
 const createArquichive = async (req, res) => {
     try {
-        const arquichive = req.body;
+        const { name, type, danger_level, description } = req.body;
 
-        if (!arquichive || Object.keys(arquichive).length === 0) {
-            return res.status(400).json({ message: "Dados inválidos" });
-        }
-
-        const arquichiveData = await fs.promises.readFile(arqPath, "utf-8");
-        const arquichiveObject = JSON.parse(arquichiveData);
-
-        arquichive.id = Date.now().toString();
-        arquichiveObject.push(arquichive);
-
-        await fs.promises.writeFile(
-            arqPath,
-            JSON.stringify(arquichiveObject, null, 2)
+        const result = await Pool.query(
+            `INSERT INTO entries (name, type, danger_level, description)
+             VALUES ($1, $2, $3, $4)
+             RETURNING *`,
+            [name, type, danger_level, description]
         );
 
-        return res.status(201).json(arquichive);
+
+        res.status(201).send(result.rows[0]);
 
     } catch (err) {
         console.error(err);
@@ -69,33 +59,24 @@ const createArquichive = async (req, res) => {
 const updateArquichive = async (req, res) => {
     try {
 
-        const { id } = req.params;
-        const updates = req.body;
+        const { name, type, danger_level, description } = req.body;
 
-        if (!updates || Object.keys(updates).length === 0) {
-            return res.status(400).json({ message: "Corpo da requisição vazio" });
-        }
-
-        const data = await fs.promises.readFile(arqPath, "utf-8");
-        const arquichiveObject = JSON.parse(data);
-
-        const index = arquichiveObject.findIndex(
-            item => String(item.id) === id
+        const result = await Pool.query(
+            `UPDATE entries
+             SET name = $1,
+                 type = $2,
+                 danger_level = $3,
+                 description = $4
+             WHERE id = $5
+             RETURNING *`,
+            [name, type, danger_level, description, req.params.id]
         );
 
-        if (index < 0) {
-            return res.status(404).json({ message: "Arquichive não encontrado para atualização" });
+        if (result.rowCount === 0) {
+            return res.status(404).send({ message: "Archive não atualizado" });
         }
 
-
-        arquichiveObject[index] = { ...arquichiveObject[index], ...updates, id: arquichiveObject[index].id };
-
-        await fs.promises.writeFile(
-            arqPath,
-            JSON.stringify(arquichiveObject, null, 2)
-        );
-
-        res.status(200).json(arquichiveObject[index]);
+        res.status(200).json(result.rows[0]);
 
     } catch (err) {
         console.error(err);
@@ -107,28 +88,13 @@ const updateArquichive = async (req, res) => {
 const deleteArquichive = async (req, res) => {
     try {
 
-        const { id } = req.params;
+        const result = await Pool.query("DELETE FROM entries WHERE id = $1", [req.params.id]);
 
-        const data = await fs.promises.readFile(arqPath, "utf-8");
-        const arquichiveObject = JSON.parse(data);
-
-        const index = arquichiveObject.findIndex(
-            item => String(item.id) === id
-        );
-
-        if (index < 0) {
-            return res.status(404).json({ message: "Arquichive não encontrado para exclusão" });
+        if (result.rowCount === 0) {
+            return res.status(404).send({ message: "Archive não deletado" });
         }
 
-        arquichiveObject.splice(index, 1);
-
-        await fs.promises.writeFile(
-            arqPath,
-            JSON.stringify(arquichiveObject, null, 2)
-        );
-
-
-        res.status(204).send();
+        res.status(204).send("Archive deletado com sucesso");
 
     } catch (err) {
         console.error(err);
