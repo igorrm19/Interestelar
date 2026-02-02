@@ -8,7 +8,7 @@ Your mission is to restore order to the archives. We have recovered fragments of
 
 <img src="./back-end/public/img/Screenshot from 2026-01-26 04-08-15.png">
 
-## Formate json of date
+## Formate json of body
 
 ```
    {
@@ -38,6 +38,11 @@ Your mission is to restore order to the archives. We have recovered fragments of
 - Node.js
 - Express
 - JSON
+- Morgan
+- Nodemon
+- Swagger
+- Cors
+- PostgresSQL
 - RestAPI
 - FetchAPI
 
