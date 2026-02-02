@@ -2,7 +2,7 @@ const Pool = require("../models/db.model");
 const Entries = require("../models/entries.model");
 
 
-const getArquichive = async (req, res) => {  // Testado
+const getArquichive = async (req, res) => {
     try {
 
         const archive = await Entries.getEntries();
@@ -21,7 +21,7 @@ const getArquichive = async (req, res) => {  // Testado
 }
 
 
-const getIdArquichive = async (req, res) => {  // Testado
+const getIdArquichive = async (req, res) => {
     try {
 
         const archive = await Entries.getEntryById(req.params.id);
